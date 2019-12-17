@@ -26,7 +26,7 @@ In this project contains 3 folders:
         swagger:
             path: ./swagger
     4. Go to /client/swagger/, open pubspec.yaml and add line after description:
-        environmexwnt:
+        environment:
             sdk: ">=2.1.0 <3.0.0"
  
  `How to generate server swagger:`
@@ -35,3 +35,8 @@ In this project contains 3 folders:
     2. Run command: swagger generate server -f ../schema/profile-spec.yml
     3. Run command: go get -u -f ./...
     4. Run command: go mod vendor
+
+`Limitation:`
+
+    1. Only Swagger spec 2.0.0
+    2. Dart 1.20.0 or later OR Flutter 0.0.20 or later
