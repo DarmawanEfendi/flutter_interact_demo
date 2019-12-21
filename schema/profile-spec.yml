@@ -88,6 +88,39 @@ paths:
           description: internal server error operation
           schema:
             $ref: '#/definitions/GeneralErrorResponse'
+    delete:
+      tags:
+        - profile
+      summary: delete profile from favourite list
+      description: ''
+      operationId: deleteProfileFavourite
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of profile
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/ProfileResponse'
+        '400':
+          description: bad request operation
+          schema:
+            $ref: '#/definitions/GeneralErrorResponse'
+        '404':
+          description: not found operation
+          schema:
+            $ref: '#/definitions/GeneralErrorResponse'
+        '500':
+          description: internal server error operation
+          schema:
+            $ref: '#/definitions/GeneralErrorResponse'
 definitions:
   MetaSchema:
     type: object

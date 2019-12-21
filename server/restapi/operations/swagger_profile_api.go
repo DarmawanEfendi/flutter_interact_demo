@@ -39,6 +39,9 @@ func NewSwaggerProfileAPI(spec *loads.Document) *SwaggerProfileAPI {
 		BearerAuthenticator: security.BearerAuth,
 		JSONConsumer:        runtime.JSONConsumer(),
 		JSONProducer:        runtime.JSONProducer(),
+		ProfileDeleteProfileFavouriteHandler: profile.DeleteProfileFavouriteHandlerFunc(func(params profile.DeleteProfileFavouriteParams) middleware.Responder {
+			return middleware.NotImplemented("operation ProfileDeleteProfileFavourite has not yet been implemented")
+		}),
 		ProfileGetProfilesHandler: profile.GetProfilesHandlerFunc(func(params profile.GetProfilesParams) middleware.Responder {
 			return middleware.NotImplemented("operation ProfileGetProfiles has not yet been implemented")
 		}),
@@ -76,6 +79,8 @@ type SwaggerProfileAPI struct {
 	// JSONProducer registers a producer for a "application/json" mime type
 	JSONProducer runtime.Producer
 
+	// ProfileDeleteProfileFavouriteHandler sets the operation handler for the delete profile favourite operation
+	ProfileDeleteProfileFavouriteHandler profile.DeleteProfileFavouriteHandler
 	// ProfileGetProfilesHandler sets the operation handler for the get profiles operation
 	ProfileGetProfilesHandler profile.GetProfilesHandler
 	// ProfilePostProfileFavouriteHandler sets the operation handler for the post profile favourite operation
@@ -141,6 +146,10 @@ func (o *SwaggerProfileAPI) Validate() error {
 
 	if o.JSONProducer == nil {
 		unregistered = append(unregistered, "JSONProducer")
+	}
+
+	if o.ProfileDeleteProfileFavouriteHandler == nil {
+		unregistered = append(unregistered, "profile.DeleteProfileFavouriteHandler")
 	}
 
 	if o.ProfileGetProfilesHandler == nil {
@@ -248,6 +257,11 @@ func (o *SwaggerProfileAPI) initHandlerCache() {
 	if o.handlers == nil {
 		o.handlers = make(map[string]map[string]http.Handler)
 	}
+
+	if o.handlers["DELETE"] == nil {
+		o.handlers["DELETE"] = make(map[string]http.Handler)
+	}
+	o.handlers["DELETE"]["/profiles/{id}/favourite"] = profile.NewDeleteProfileFavourite(o.context, o.ProfileDeleteProfileFavouriteHandler)
 
 	if o.handlers["GET"] == nil {
 		o.handlers["GET"] = make(map[string]http.Handler)

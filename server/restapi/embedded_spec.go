@@ -141,6 +141,54 @@ func init() {
             }
           }
         }
+      },
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "profile"
+        ],
+        "summary": "delete profile from favourite list",
+        "operationId": "deleteProfileFavourite",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "ID of profile",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "400": {
+            "description": "bad request operation",
+            "schema": {
+              "$ref": "#/definitions/GeneralErrorResponse"
+            }
+          },
+          "404": {
+            "description": "not found operation",
+            "schema": {
+              "$ref": "#/definitions/GeneralErrorResponse"
+            }
+          },
+          "500": {
+            "description": "internal server error operation",
+            "schema": {
+              "$ref": "#/definitions/GeneralErrorResponse"
+            }
+          }
+        }
       }
     }
   },
@@ -338,6 +386,54 @@ func init() {
         ],
         "responses": {
           "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ProfileResponse"
+            }
+          },
+          "400": {
+            "description": "bad request operation",
+            "schema": {
+              "$ref": "#/definitions/GeneralErrorResponse"
+            }
+          },
+          "404": {
+            "description": "not found operation",
+            "schema": {
+              "$ref": "#/definitions/GeneralErrorResponse"
+            }
+          },
+          "500": {
+            "description": "internal server error operation",
+            "schema": {
+              "$ref": "#/definitions/GeneralErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "profile"
+        ],
+        "summary": "delete profile from favourite list",
+        "operationId": "deleteProfileFavourite",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "ID of profile",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
             "description": "successful operation",
             "schema": {
               "$ref": "#/definitions/ProfileResponse"

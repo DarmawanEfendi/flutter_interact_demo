@@ -45,13 +45,13 @@ import 'package:swagger/api.dart';
 
 
 var api_instance = new ProfileApi();
-var onlyFavourite = true; // bool | query for filter only favourite
+var id = 56; // int | ID of profile
 
 try {
-    var result = api_instance.getProfiles(onlyFavourite);
+    var result = api_instance.deleteProfileFavourite(id);
     print(result);
 } catch (e) {
-    print("Exception when calling ProfileApi->getProfiles: $e\n");
+    print("Exception when calling ProfileApi->deleteProfileFavourite: $e\n");
 }
 
 ```
@@ -62,6 +62,7 @@ All URIs are relative to *http://localhost:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*ProfileApi* | [**deleteProfileFavourite**](docs//ProfileApi.md#deleteprofilefavourite) | **DELETE** /profiles/{id}/favourite | delete profile from favourite list
 *ProfileApi* | [**getProfiles**](docs//ProfileApi.md#getprofiles) | **GET** /profiles | Find all profiles
 *ProfileApi* | [**postProfileFavourite**](docs//ProfileApi.md#postprofilefavourite) | **POST** /profiles/{id}/favourite | add profile to favourite list
 

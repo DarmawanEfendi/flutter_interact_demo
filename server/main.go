@@ -89,10 +89,45 @@ func main() {
 			})
 		}
 
-
 		message := "Successfully changes saved"
 		status := int64(201)
 		return profile.NewPostProfileFavouriteCreated().WithPayload(&models.ProfileResponse{
+			Data: &models.ProfileSchema{
+				ID:          data[index].ID,
+				IsFavourite: data[index].IsFavourite,
+				Name:        data[index].Name,
+				URL:         data[index].Url,
+			},
+			Meta: &models.MetaSchema{
+				Message: &message,
+				Status:  &status,
+			},
+		})
+	})
+	api.ProfileDeleteProfileFavouriteHandler = profile.DeleteProfileFavouriteHandlerFunc(func(params profile.DeleteProfileFavouriteParams) middleware.Responder {
+		id := params.ID
+		index := -1
+		for i := 0; i < len(data); i += 1 {
+			if id == data[i].ID {
+				index = i
+				*data[i].IsFavourite = !(*data[i].IsFavourite)
+			}
+		}
+
+		if index == -1 {
+			message := "Profile not found"
+			status := int64(404)
+			return profile.NewDeleteProfileFavouriteNotFound().WithPayload(&models.GeneralErrorResponse{
+				Meta: &models.MetaSchema{
+					Message: &message,
+					Status:  &status,
+				},
+			})
+		}
+
+		message := "Successfully changes saved"
+		status := int64(200)
+		return profile.NewDeleteProfileFavouriteOK().WithPayload(&models.ProfileResponse{
 			Data: &models.ProfileSchema{
 				ID:          data[index].ID,
 				IsFavourite: data[index].IsFavourite,
